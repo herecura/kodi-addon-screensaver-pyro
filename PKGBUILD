@@ -4,7 +4,7 @@ pkgname=kodi-addon-screensaver-pyro
 epoch=1
 pkgver=2.0.0
 _codename=Leia
-pkgrel=6
+pkgrel=7
 pkgdesc="Pyro screensaver for Kodi"
 arch=('x86_64')
 url='https://github.com/xbmc/screensaver.pyro'
@@ -17,16 +17,17 @@ sha512sums=('383fd40fc2bde9a1fe52126300b6279ec78ceab773bd6a763c8b72c3d3ed9b04e5b
 
 build() {
     cd "screensaver.pyro-$pkgver-$_codename"
-	cmake \
-		-DCMAKE_INSTALL_PREFIX=/usr \
-		-DCMAKE_BUILD_TYPE=Release \
-		-DBUILD_SHARED_LIBS=1 \
-		-DUSE_LTO=1
-	make
+    cmake \
+        -DCMAKE_INSTALL_PREFIX=/usr \
+        -DCMAKE_BUILD_TYPE=Release \
+        -DBUILD_SHARED_LIBS=1 \
+        -DUSE_LTO=1 \
+        .
+    make
 }
 
 package() {
     cd "screensaver.pyro-$pkgver-$_codename"
-	make DESTDIR="$pkgdir/" install
+    make DESTDIR="$pkgdir/" install
 }
 
